@@ -9,19 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragMonday extends Fragment {
+public class FragContacts extends Fragment {
     private View view;
 
     //상태 저장하기
-    public static FragMonday newInstance() {
-        FragMonday fragMonday = new FragMonday();
-        return fragMonday;
+    public static FragContacts newInstance() {
+        FragContacts fragContacts = new FragContacts();
+        return fragContacts;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable  Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_monday, container, false);
+        view = inflater.inflate(R.layout.frag_contacts, container, false);
 
         return view;
     }
