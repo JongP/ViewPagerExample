@@ -22,9 +22,9 @@ public class ViewPagerAdaptor extends FragmentStateAdapter {
 
         switch (position){
             case 0:
-                return FragMonday.newInstance();
+                return FragContacts.newInstance();
             case 1:
-                return FragTuesday.newInstance();
+                return FragGallery.newInstance();
             case 2:
                 return  FragWensday.newInstance();
             default:
