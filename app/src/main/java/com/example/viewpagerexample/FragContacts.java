@@ -1,6 +1,8 @@
 package com.example.viewpagerexample;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -22,9 +24,11 @@ import com.example.viewpagerexample.adapters.ContactsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragContacts extends Fragment{
+public class FragContacts extends Fragment {
     private View view;
     private RecyclerView recyclerView;
+
+
 
     //상태 저장하기
     public static FragContacts newInstance() {
@@ -59,32 +63,41 @@ public class FragContacts extends Fragment{
 
         List<ContactItem> list = new ArrayList<>();
 
-        Log.d("FragContact","I'm fine thank you and you");
         Cursor cursor = getContext().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,
                 null, null, null);
-        Log.d("FragContact","I'm fine thank you and bye you");
+
         cursor.moveToFirst();
-
-
-
 
         //if we have no contacts there's error
        do{
-            Log.d("FragContact","read start");
+            //Log.d("FragContact","read start");
 
 
 
-
-            Log.d("FragContact","read name");
+           String id =cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
+            //Log.d("FragContact","read name");
             String name =cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY));
-            Log.d("FragContact","read number");
-            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            //Log.d("FragContact","read number");
+            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER));
 
+           if (cursor.getInt(cursor.getColumnIndex(
+                   ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+               Cursor pCur = getContext().getContentResolver().query(
+                       ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                       null,
+                       ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                       new String[]{id}, null);
+               while (pCur.moveToNext()) {
+                   number = pCur.getString(pCur.getColumnIndex(
+                           ContactsContract.CommonDataKinds.Phone.NUMBER));
+                   Log.i("GOOD", "Name: " + name);
+                   Log.i("GOOD", "Phone Number: " + number);
+               }
+               pCur.close();
+           }
 
 
             list.add(new ContactItem(name, number,""));
-            Log.d("FragContact","getting contact");
-            //cursor.moveToNext();
 
         } while(cursor.moveToNext());
         cursor.close();
@@ -92,6 +105,5 @@ public class FragContacts extends Fragment{
 
         return list;
     }
-
 
 }
