@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.viewpagerexample.adapters.CurrencyRVAdapter;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +60,6 @@ public class FragDoge extends Fragment {
         currencyRVAdapter = new CurrencyRVAdapter(currencyModelArrayList,getContext());
         currenciesRV.setLayoutManager(new LinearLayoutManager(getContext()));
         currenciesRV.setAdapter(currencyRVAdapter);
-        getCurrencyData();
 
         searchEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,6 +82,14 @@ public class FragDoge extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onResume() {
+        currencyModelArrayList.clear();
+        getCurrencyData();
+        super.onResume();
+    }
+
     private  void filterCurrencies(String currency){
         ArrayList<CurrencyModel> filterList = new ArrayList<>();
         for(CurrencyModel item : currencyModelArrayList){
@@ -97,6 +105,8 @@ public class FragDoge extends Fragment {
         }
 
     }
+
+
 
     private void getCurrencyData(){
         loadingPB.setVisibility(View.VISIBLE);

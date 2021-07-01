@@ -64,4 +64,6 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
             rateTV = itemView.findViewById(R.id.idTVCurrencyRate);
         }
     }
+
+
 }
