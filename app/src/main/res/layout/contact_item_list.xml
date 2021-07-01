@@ -19,9 +19,9 @@
 
         <ImageView
             android:id="@+id/iv_contactprofile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_launcher_background"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/ic_launcher"
             />
 
         <LinearLayout
@@ -29,14 +29,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:padding="10dp">
+            android:padding="7dp">
 
             <TextView
                 android:id="@+id/tv_conatactname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:text="Jong Pakr"
                 android:textColor="@color/black"/>
 
@@ -44,8 +44,8 @@
                 android:id="@+id/tv_conatactnum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginTop="8dp"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
                 android:text="010"
                 android:textColor="@color/black"/>
 
