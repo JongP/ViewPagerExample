@@ -1,7 +1,11 @@
 package com.example.viewpagerexample;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -13,6 +17,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -20,6 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpagerexample.adapters.ContactsAdapter;
+import com.example.viewpagerexample.utils.ContactData;
+import com.example.viewpagerexample.utils.ContactUtilsKt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +34,6 @@ import java.util.List;
 public class FragContacts extends Fragment {
     private View view;
     private RecyclerView recyclerView;
-
 
 
     //상태 저장하기
@@ -38,7 +44,7 @@ public class FragContacts extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable  Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_contacts, container, false);
 
         recyclerView = view.findViewById(R.id.rv_contacts);
@@ -48,21 +54,43 @@ public class FragContacts extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-
-
-
-
-        ContactsAdapter adapter = new ContactsAdapter(getContext(),getContacts());
+        ContactsAdapter adapter = new ContactsAdapter(getContext(), getContacts());
 
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private List<ContactItem> getContacts(){
+    private List<ContactItem> getContacts() {
+
+
+        @SuppressLint("MissingPermission") List<ContactData> contactsList = ContactUtilsKt.retrieveAllContacts(getContext());
 
         List<ContactItem> list = new ArrayList<>();
 
+        for (ContactData data : contactsList) {
+
+            String number = "";
+            String kotName = data.getName();
+            List<String> kotNumber = data.getPhoneNumber();
+            for (String str : kotNumber) {
+                number += str;
+            }
+
+            Uri kotUri = data.getAvatar();
+
+            Log.d("neverdie", "Name is " + kotName);
+            Log.d("neverdie", "number is " + number);
+            Log.d("neverdie", "Uri is " + kotUri);
+
+            list.add(new ContactItem(kotName, number, kotUri));
+        }
+
+        return list;
+
+    }
+}
+        /*
         Cursor cursor = getContext().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,
                 null, null, null);
 
@@ -71,14 +99,14 @@ public class FragContacts extends Fragment {
         //if we have no contacts there's error
        do{
             //Log.d("FragContact","read start");
-
+           String number="None";
+           Uri thumbnail;
 
 
            String id =cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
             //Log.d("FragContact","read name");
             String name =cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY));
             //Log.d("FragContact","read number");
-            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER));
 
            if (cursor.getInt(cursor.getColumnIndex(
                    ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
@@ -97,6 +125,7 @@ public class FragContacts extends Fragment {
            }
 
 
+
             list.add(new ContactItem(name, number,""));
 
         } while(cursor.moveToNext());
@@ -106,4 +135,4 @@ public class FragContacts extends Fragment {
         return list;
     }
 
-}
+}*/

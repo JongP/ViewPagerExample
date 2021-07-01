@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,8 +19,8 @@
 
         <ImageView
             android:id="@+id/iv_contactprofile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/ic_launcher_background"
             />
 
@@ -19,12 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/tv_conatactname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 android:text="Jong Pakr"
                 android:textColor="@color/black"/>
 
@@ -32,14 +44,16 @@
                 android:id="@+id/tv_conatactnum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="01053677612"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"
+                android:text="010"
                 android:textColor="@color/black"/>
-
 
         </LinearLayout>
 
-
     </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

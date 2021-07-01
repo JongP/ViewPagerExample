@@ -2,6 +2,7 @@ package com.example.viewpagerexample.adapters;
 
 import android.content.Context;
 import android.media.Image;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpagerexample.ContactItem;
 import com.example.viewpagerexample.R;
+import com.example.viewpagerexample.utils.ContactData;
 
 import java.util.List;
 
@@ -52,7 +54,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         contact_name.setText(mListContacts.get(position).getContactName());
         contact_num.setText(mListContacts.get(position).getContactNum());
-        //thumb
+
+        Uri thumbnail = mListContacts.get(position).getContactThumbnail();
+        if(thumbnail!=null){
+            contact_thumbnail.setImageURI(thumbnail);
+        }
 
 
     }

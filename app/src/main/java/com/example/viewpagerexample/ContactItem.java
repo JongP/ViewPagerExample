@@ -1,10 +1,13 @@
 package com.example.viewpagerexample;
 
+import android.net.Uri;
+
 public class ContactItem {
 
-    private String contactName, contactNum, contactThumbnail;
+    private String contactName, contactNum;
+    private Uri contactThumbnail;
 
-    public ContactItem(String contactName, String contactNum, String contactThumbnail) {
+    public ContactItem(String contactName, String contactNum, Uri contactThumbnail) {
         this.contactName = contactName;
         this.contactNum = contactNum;
         this.contactThumbnail = contactThumbnail;
@@ -26,11 +29,11 @@ public class ContactItem {
         this.contactNum = contactNum;
     }
 
-    public String getContactThumbnail() {
+    public Uri getContactThumbnail() {
         return contactThumbnail;
     }
 
-    public void setContactThumbnail(String contactThumbnail) {
+    public void setContactThumbnail(Uri contactThumbnail) {
         this.contactThumbnail = contactThumbnail;
     }
 }
