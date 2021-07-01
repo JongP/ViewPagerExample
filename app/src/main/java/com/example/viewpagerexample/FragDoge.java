@@ -1,11 +1,13 @@
 package com.example.viewpagerexample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.viewpagerexample.adapters.CurrencyRVAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -41,7 +44,8 @@ public class FragDoge extends Fragment {
     private ProgressBar loadingPB;
     private ArrayList<CurrencyModel> currencyModelArrayList;
     private CurrencyRVAdapter currencyRVAdapter;
-
+    private FloatingActionButton fltbtn;
+    private Frag_button fragbtn;
     //상태 저장하기
     public static FragDoge newInstance() {
         FragDoge fragDoge = new FragDoge();
@@ -60,6 +64,8 @@ public class FragDoge extends Fragment {
         currencyRVAdapter = new CurrencyRVAdapter(currencyModelArrayList,getContext());
         currenciesRV.setLayoutManager(new LinearLayoutManager(getContext()));
         currenciesRV.setAdapter(currencyRVAdapter);
+        fltbtn = view.findViewById(R.id.button);
+        fragbtn = new Frag_button();
 
         searchEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,6 +81,16 @@ public class FragDoge extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 filterCurrencies(s.toString());
+            }
+        });
+
+        fltbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), Frag_button.class);
+                startActivity(intent);
+
             }
         });
 

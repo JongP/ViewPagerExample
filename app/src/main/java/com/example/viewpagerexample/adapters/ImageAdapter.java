@@ -35,7 +35,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
             // 뷰 객체에 대한 참조.
             image = itemView.findViewById(R.id.image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    show(image);
+                }
+            });
         }
+    }
+
+    public void show(ImageView image){
+
     }
 
 
@@ -60,6 +71,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 .load(image_uri)
                 .into(holder.image);
     }
+
+
 
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override

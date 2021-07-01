@@ -17,14 +17,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpagerexample.adapters.ImageAdapter;
@@ -80,23 +76,6 @@ public class FragGallery extends Fragment {
         cnt = sharePref.getInt("Count",0 );
         Log.d("count", "갯수:"+cnt);
 
-        //if(cnt==0){
-        //    cnt_s = getActivity().getCacheDir()+"/"+image_num;
-        //    FileInputStream fis = null;
-        //    try {
-        //        fis = new FileInputStream(cnt_s);
-        //        DataInputStream dis = new DataInputStream(fis);
-        //        cnt = dis.readInt();
-        //        Log.d("cnt", "count " + cnt);
-
-        //        dis.close();
-
-        //    } catch (IOException e) {
-        //        Toast.makeText(getContext(), "사진개수 0", Toast.LENGTH_SHORT).show();
-         //   }
-        //}
-
-        Log.d("cnt", "count2 " + cnt);
         try {
             for(int i=0;i<cnt;i++){
                 String imgpath = getActivity().getCacheDir() + "/" + i;   // 내부 저장소에 저장되어 있는 이미지 경로
@@ -111,7 +90,7 @@ public class FragGallery extends Fragment {
 
         adapter = new ImageAdapter(uriList, getContext());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,11 +141,10 @@ public class FragGallery extends Fragment {
                             }
 
                         }
-                        saveCount(cnt);
                             updateData(cnt);
                         adapter = new ImageAdapter(uriList, getContext());
                         recyclerView.setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));     // 리사이클러뷰 수평 스크롤 적용
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));     // 리사이클러뷰 수평 스크롤 적용
 
 
 
@@ -191,7 +169,7 @@ public class FragGallery extends Fragment {
 
                     adapter = new ImageAdapter(uriList, getContext());
                     recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
+                    recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 }
             }
         }
@@ -212,20 +190,6 @@ public class FragGallery extends Fragment {
         }
     }
 
-    public void saveCount (Integer count){   // 선택한 이미지 내부 저장소에 저장
-        File tempFile = new File(getActivity().getCacheDir(), image_num);    // 파일 경로와 이름 넣기
-        try {
-            tempFile.createNewFile();   // 자동으로 빈 파일을 생성하기
-            FileOutputStream out = new FileOutputStream(tempFile);  // 파일을 쓸 수 있는 스트림을 준비하기
-            out.write(count);
-            out.close();    // 스트림 닫아주기
-
-            Toast.makeText(getContext(), "갯수 저장 성공", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "갯수 저장 실패", Toast.LENGTH_SHORT).show();
-        }
-    }
-
 
     private Uri getImageUri(Context context, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -235,10 +199,6 @@ public class FragGallery extends Fragment {
     }
 
 
-    public void saveData(int cnt){
-        editor.putInt("Count", cnt);
-        editor.apply();
-    }
     public void updateData(int cnt){
         editor.putInt("Count", cnt);
         editor.apply();
