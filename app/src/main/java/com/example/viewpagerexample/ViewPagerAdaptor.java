@@ -1,11 +1,8 @@
 package com.example.viewpagerexample;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
@@ -26,7 +23,7 @@ public class ViewPagerAdaptor extends FragmentStateAdapter {
             case 1:
                 return FragGallery.newInstance();
             case 2:
-                return  FragWensday.newInstance();
+                return  FragDoge.newInstance();
             default:
                 return null;
         }

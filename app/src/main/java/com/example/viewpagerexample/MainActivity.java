@@ -27,7 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         viewPager.setAdapter(fragmentPagerAdapter);
-        new TabLayoutMediator(tabLayout, viewPager, ((tab, position) -> tab.setText("OBJECT "+(position +1)) )).attach();
+        //new TabLayoutMediator(tabLayout, viewPager, ((tab, position) -> tab.setText("OBJECT "+(position +1))) ).attach();
+        new TabLayoutMediator(tabLayout, viewPager, ((tab, position) -> {
+                switch(position) {
+                    case 0:
+                        tab.setText("Contacts");
+                        break;
+                    case 1:
+                        tab.setText("Photos");
+                        break;
+                    case 2:
+                        tab.setText("Gazzza");
+                        break;
+                    default:
+                        tab.setText("null");
+                        break;
+                }
+            }
+        ) ).attach();
 
 
     }
