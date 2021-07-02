@@ -8,9 +8,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Wallet")
 public class User_wallet {
-    @PrimaryKey(autoGenerate = true) //autoGenerate는 알아서 id를 1씩 증가시켜준다. autoincrement와 똑같
-    private int id;
 
+    @PrimaryKey
     @ColumnInfo(name = "symbol") //컬럼명 변수명과 다르게 사용 가능
     private String sym;
 
@@ -26,13 +25,6 @@ public class User_wallet {
         this.val = val;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getSym() {
         return sym;

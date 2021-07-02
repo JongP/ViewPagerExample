@@ -19,8 +19,8 @@ public interface UserDao_wallet {
 
 
 
-    @Query("UPDATE Wallet SET symbol = :p, quantity =:t, value =:s WHERE id =:id")
-    void update(String p, int t, Double s, int id);
+    @Query("UPDATE Wallet SET quantity =:t, value =:s WHERE symbol = :p")
+    void update(int t, Double s, String p);
 
 
 

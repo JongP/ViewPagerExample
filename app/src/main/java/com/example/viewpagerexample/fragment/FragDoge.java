@@ -1,6 +1,8 @@
 package com.example.viewpagerexample.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -53,6 +55,10 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
     private FloatingActionButton fltbtn;
     private AppDataBase_wallet db;
 
+
+
+
+
     //상태 저장하기
     public static FragDoge newInstance() {
         FragDoge fragDoge = new FragDoge();
@@ -73,8 +79,16 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
         currenciesRV.setAdapter(currencyRVAdapter);
         fltbtn = view.findViewById(R.id.button);
 
-        Log.d("mydatabase", "database is set");
+
+
+
+
         db = AppDataBase_wallet.getInstance(getContext());
+
+        if(db.userDao().getDataCount()==0){
+            User_wallet user = new User_wallet("balance", 0, 50000.0);
+            db.userDao().insert(user);
+        }
 
 
         getCurrencyData();
@@ -206,4 +220,5 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
 
         startActivity(intent);
     }
+
 }
