@@ -10,8 +10,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Order Activity"
+        android:layout_marginTop="40dp"
+        android:text="Going To Mars"
         android:textColor="@color/black"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,9 +90,10 @@
             android:layout_marginLeft="2dp"
             android:layout_toLeftOf="@id/tv_coinown"
             android:padding="3dp"
-            android:text="일론 머스"
+            android:text="일론 머스크"
             android:textColor="@color/black_shade_1"
             android:textStyle="bold" />
+
 
         <TextView
             android:id="@+id/tv_coinbalance"
@@ -139,13 +140,13 @@
             android:textSize="20sp"/>
 
         <TextView
+            android:id="@+id/tv_qunatity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="@color/black"
-            android:textSize="20sp"
             android:layout_marginHorizontal="15dp"
-            />
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/coin_btn_plus"
@@ -163,7 +164,7 @@
         app:layout_constraintTop_toBottomOf="@id/liner_counter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="4000$"
+        android:text="$ 0"
         android:textSize="30sp"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
@@ -173,24 +174,27 @@
         android:id="@+id/linear_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="15dp"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_totalprice">
 
         <Button
             android:id="@+id/btn_sell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sell"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="30dp"
+            android:text="Sell" />
+
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buy"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30dp"
+            android:text="Buy" />
 
     </LinearLayout>
 

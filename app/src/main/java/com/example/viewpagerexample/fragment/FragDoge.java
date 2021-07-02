@@ -148,6 +148,7 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
                         JSONObject quote = dataObj.getJSONObject("quote");
                         JSONObject USD = quote.getJSONObject("USD");
                         price = USD.getDouble("price");
+                        price = Math.round(price*100)/100.0;
                         currencyModelArrayList.add(new CurrencyModel(name,symbol,price));
                     }
                     currencyRVAdapter.notifyDataSetChanged();
@@ -180,7 +181,20 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
     @Override
     public void clickCoin(int position, List<CurrencyModel> currencyModels) {
         Log.d("newStart","hope");
+
+        String symbol = currencyModels.get(position).getSymbol();
+        String name = currencyModels.get(position).getName();
+        double price = currencyModels.get(position).getPrice();
+
+
+
+
         Intent intent = new Intent(getActivity().getApplicationContext(), OrderActivity.class);
+        intent.putExtra("symbol",symbol);
+        intent.putExtra("name",name);
+        intent.putExtra("price",price);
+
+
         startActivity(intent);
     }
 }
