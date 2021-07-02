@@ -1,6 +1,7 @@
 package com.example.viewpagerexample.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +17,26 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.ViewHolder> {
 
-    private ArrayList<CurrencyModel> currencyModelArrayList;
+    private List<CurrencyModel> currencyModelArrayList = new ArrayList<CurrencyModel>();
     private Context context;
     private  static DecimalFormat df2 = new DecimalFormat("#.##");
+    GetOneCoin interfaceCoin;
 
-    public CurrencyRVAdapter(ArrayList<CurrencyModel> currencyModelArrayList, Context context) {
-        this.currencyModelArrayList = currencyModelArrayList;
-        this.context = context;
+    public CurrencyRVAdapter(GetOneCoin interfaceCoin){
+        this.interfaceCoin = interfaceCoin;
     }
 
-    public void filterList(ArrayList<CurrencyModel> filteredList){
+    public CurrencyRVAdapter(List<CurrencyModel> currencyModelArrayList, Context context,GetOneCoin interfaceCoin) {
+        this.currencyModelArrayList = currencyModelArrayList;
+        this.context = context;
+        this.interfaceCoin = interfaceCoin;
+    }
+
+    public void filterList(List<CurrencyModel> filteredList){
         currencyModelArrayList = filteredList;
         notifyDataSetChanged();
     }
@@ -54,7 +62,7 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
         return currencyModelArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView currencyNameTV, symbolTV, rateTV;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
@@ -62,7 +70,33 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
             currencyNameTV = itemView.findViewById(R.id.idTvCurrencyName);
             symbolTV = itemView.findViewById(R.id.idTVSymbol);
             rateTV = itemView.findViewById(R.id.idTVCurrencyRate);
+
+            currencyNameTV.setOnClickListener(this);
+            symbolTV.setOnClickListener(this);
+            rateTV.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v){
+            Log.d("AdapterPlace","check");
+            Log.d("AdapterPlace",String.valueOf(getAdapterPosition()));
+            Log.d("AdapterPlace",String.valueOf(getAbsoluteAdapterPosition()));
+            //Log.d("AdapterPlace",String.valueOf(getBindingAdapter()));
+            Log.d("AdapterPlace",String.valueOf(currencyModelArrayList));
+            int i = 0;
+            List<CurrencyModel> arrayList = null;
+            i=getAbsoluteAdapterPosition();
+            arrayList=currencyModelArrayList;
+            try {
+                interfaceCoin.clickCoin(i,arrayList);
+            }catch (NullPointerException e){
+                System.err.println("Null pointer exception");
+            }
+        }
+    }
+
+    public interface GetOneCoin{
+        void clickCoin(int position, List<CurrencyModel> currencyModels);
     }
 
 

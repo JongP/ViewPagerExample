@@ -33,12 +33,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:elevation="8dp"
+        android:src="@drawable/ic_baseline_monetization_on_24"
+        app:fabSize="auto"
+        app:fabCustomSize="60dp"
+        app:maxImageSize="40dp"
+
  />
 
 
