@@ -1,10 +1,14 @@
-package com.example.viewpagerexample;
+package com.example.viewpagerexample.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.viewpagerexample.fragment.FragContacts;
+import com.example.viewpagerexample.fragment.FragDoge;
+import com.example.viewpagerexample.fragment.FragGallery;
 
 public class ViewPagerAdaptor extends FragmentStateAdapter {
 

@@ -1,29 +1,21 @@
-package com.example.viewpagerexample;
+package com.example.viewpagerexample.fragment;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ContentUris;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.viewpagerexample.ContactItem;
+import com.example.viewpagerexample.R;
 import com.example.viewpagerexample.adapters.ContactsAdapter;
 import com.example.viewpagerexample.utils.ContactData;
 import com.example.viewpagerexample.utils.ContactUtilsKt;

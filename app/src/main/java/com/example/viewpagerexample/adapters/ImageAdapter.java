@@ -1,6 +1,7 @@
 package com.example.viewpagerexample.adapters;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import com.example.viewpagerexample.R;
 
 import java.time.Instant;
 import java.util.ArrayList;
+
+
+
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
     private ArrayList<Uri> mData = null ;
@@ -70,6 +74,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         Glide.with(mContext)
                 .load(image_uri)
                 .into(holder.image);
+
     }
 
 

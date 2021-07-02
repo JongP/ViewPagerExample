@@ -1,4 +1,4 @@
-package com.example.viewpagerexample;
+package com.example.viewpagerexample.fragment;
 
 import android.content.ClipData;
 import android.content.ContentResolver;
@@ -23,15 +23,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.viewpagerexample.R;
 import com.example.viewpagerexample.adapters.ImageAdapter;
+import com.example.viewpagerexample.adapters.RecyclerViewDecoration;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
@@ -90,16 +88,15 @@ public class FragGallery extends Fragment {
 
         adapter = new ImageAdapter(uriList, getContext());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration(5, 5));
 
         add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            @Override            public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100);
-
             }
         });
 
@@ -145,6 +142,7 @@ public class FragGallery extends Fragment {
                         adapter = new ImageAdapter(uriList, getContext());
                         recyclerView.setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
                         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));     // 리사이클러뷰 수평 스크롤 적용
+                        recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
 
 
 
@@ -170,6 +168,8 @@ public class FragGallery extends Fragment {
                     adapter = new ImageAdapter(uriList, getContext());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                    recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
+
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.example.viewpagerexample;
+package com.example.viewpagerexample.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.viewpagerexample.CurrencyModel;
+import com.example.viewpagerexample.OrderActivity;
+import com.example.viewpagerexample.R;
+import com.example.viewpagerexample.WalletActivity;
 import com.example.viewpagerexample.adapters.CurrencyRVAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
