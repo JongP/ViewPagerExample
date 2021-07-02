@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpagerexample.R;
 import com.example.viewpagerexample.adapters.ImageAdapter;
-import com.example.viewpagerexample.adapters.RecyclerViewDecoration;
+//import com.example.viewpagerexample.adapters.RecyclerViewDecoration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -89,7 +89,7 @@ public class FragGallery extends Fragment {
         adapter = new ImageAdapter(uriList, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        recyclerView.addItemDecoration(new RecyclerViewDecoration(5, 5));
+        //recyclerView.addItemDecoration(new RecyclerViewDecoration(5, 5));
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override            public void onClick(View view) {
@@ -142,7 +142,7 @@ public class FragGallery extends Fragment {
                         adapter = new ImageAdapter(uriList, getContext());
                         recyclerView.setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
                         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));     // 리사이클러뷰 수평 스크롤 적용
-                        recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
+                        //recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
 
 
 
@@ -168,7 +168,7 @@ public class FragGallery extends Fragment {
                     adapter = new ImageAdapter(uriList, getContext());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                    recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
+                    //recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
 
                 }
             }

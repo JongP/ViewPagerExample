@@ -70,6 +70,8 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
         currenciesRV.setAdapter(currencyRVAdapter);
         fltbtn = view.findViewById(R.id.button);
 
+        getCurrencyData();
+
 
         searchEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,8 +107,8 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
 
     @Override
     public void onResume() {
-        currencyModelArrayList.clear();
-        getCurrencyData();
+        //currencyModelArrayList.clear();
+        //getCurrencyData();
         super.onResume();
     }
 
