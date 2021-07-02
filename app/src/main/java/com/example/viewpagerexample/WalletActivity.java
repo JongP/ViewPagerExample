@@ -1,8 +1,12 @@
 package com.example.viewpagerexample;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +15,21 @@ import android.widget.TextView;
 
 import com.example.viewpagerexample.Room.AppDataBase_wallet;
 import com.example.viewpagerexample.Room.User_wallet;
+import com.example.viewpagerexample.adapters.CoinAdapter;
+import com.example.viewpagerexample.adapters.ImageAdapter;
+
+import java.util.ArrayList;
 
 
 public class WalletActivity extends AppCompatActivity {
 
     private AppDataBase_wallet db;
     private TextView bal;
+    private RecyclerView recyclerView;
+
+    ArrayList<CoinItem> List = new ArrayList<>();
+    CoinAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
+
 
 
     @Override
@@ -26,10 +39,14 @@ public class WalletActivity extends AppCompatActivity {
         bal = findViewById(R.id.user_balance);
 
         db = AppDataBase_wallet.getInstance(this);
+        recyclerView = findViewById(R.id.recyclerView_wallet);
 
 
 
-        bal.setText("$"+db.userDao().getAll().get(0).getBalance().toString());
+
+        adapter = new CoinAdapter(WalletActivity.this,List);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(WalletActivity.this, RecyclerView.HORIZONTAL, false));
 
     }
 

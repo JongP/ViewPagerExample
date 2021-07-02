@@ -18,6 +18,7 @@ public interface UserDao_wallet {
 
     @Query("UPDATE Wallet SET BTC = :p WHERE id =:id")
     void updateBTC(int p, int id);
+
     @Query("UPDATE Wallet SET ETH = :p WHERE id =:id")
     void updateETH(int p, int id);
     @Query("UPDATE Wallet SET USDC = :p WHERE id =:id")

@@ -80,12 +80,20 @@ public class FragGallery extends Fragment {
         Map<String, ?> totalValue = sharePref.getAll();
         cnt = sharePref.getInt("Count",0 );
         Log.d("count", "갯수:"+cnt);
+        Toast.makeText(getContext(), "갯수:"+cnt, Toast.LENGTH_SHORT).show();
+
 
         try {
             for(int i=0;i<cnt;i++){
+                Log.d("look", "for 성공");
                 String imgpath = getActivity().getCacheDir() + "/" + i;   // 내부 저장소에 저장되어 있는 이미지 경로
+                Log.d("look", "impath 성공"+imgpath);
                 Bitmap bm = BitmapFactory.decodeFile(imgpath);
+                Log.d("look", "비트맵성공"+bm);
+
                 Uri uri_set = getImageUri(getContext(), bm);
+                Log.d("look", "uri 성공");
+
                 uriList.add(uri_set);
             }
         } catch (Exception e) {
@@ -197,6 +205,8 @@ public class FragGallery extends Fragment {
 
     public void saveBitmapToJpeg (Bitmap bitmap){   // 선택한 이미지 내부 저장소에 저장
         File tempFile = new File(getActivity().getCacheDir(), cnt.toString());
+        Log.d("look", "파일경로"+tempFile);
+
         // 파일 경로와 이름 넣기
         try {
             tempFile.createNewFile();   // 자동으로 빈 파일을 생성하기
@@ -210,11 +220,16 @@ public class FragGallery extends Fragment {
     }
 
 
+
     private Uri getImageUri(Context context, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        Log.d("look", "compress 성공");
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+        Log.d("look", "insert 성공"+path);
+        Uri i = Uri.parse(path);
+        Log.d("look", "parse 성공");
+        return i;
     }
 
 
