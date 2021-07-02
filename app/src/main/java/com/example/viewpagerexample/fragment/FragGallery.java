@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpagerexample.R;
 import com.example.viewpagerexample.adapters.ImageAdapter;
-//import com.example.viewpagerexample.adapters.RecyclerViewDecoration;
+import com.example.viewpagerexample.adapters.RecyclerViewDecoration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -37,6 +37,8 @@ import java.util.Map;
 public class FragGallery extends Fragment {
     private View view;
     private Button add;
+    private Button remove;
+
     private ImageView img1;
     private ImageView img2;
     private Integer cnt=0;
@@ -64,11 +66,16 @@ public class FragGallery extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_gallery, container, false);
 
+        initialized(view);
+
         add = (Button) view.findViewById(R.id.getGallery);
+        remove = (Button)view.findViewById(R.id.remove);
         recyclerView = view.findViewById(R.id.recyclerView);
 
         sharePref = getActivity().getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
         editor = sharePref.edit();
+
+
 
         Map<String, ?> totalValue = sharePref.getAll();
         cnt = sharePref.getInt("Count",0 );
@@ -81,7 +88,6 @@ public class FragGallery extends Fragment {
                 Uri uri_set = getImageUri(getContext(), bm);
                 uriList.add(uri_set);
             }
-            Toast.makeText(getContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(getContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
         }
@@ -92,7 +98,8 @@ public class FragGallery extends Fragment {
         //recyclerView.addItemDecoration(new RecyclerViewDecoration(5, 5));
 
         add.setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -100,8 +107,22 @@ public class FragGallery extends Fragment {
             }
         });
 
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeData();
+            }
+        });
+
         return view;
     }
+
+    public void initialized(View view){
+
+
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) { // 갤러리
@@ -115,7 +136,7 @@ public class FragGallery extends Fragment {
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
                 if (clipData != null) {
 
-                    if(clipData.getItemCount() > 10) {   // 선택한 이미지가 11장 이상인 경우
+                    if(clipData.getItemCount() > 20) {   // 선택한 이미지가 11장 이상인 경우
                             Toast.makeText(getContext(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
                         }
 
@@ -132,7 +153,6 @@ public class FragGallery extends Fragment {
 
                                 instream.close();   // 스트림 닫아주기
                                 saveBitmapToJpeg(imgBitmap);    // 내부 저장소에 저장
-                                Toast.makeText(getContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Toast.makeText(getContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
                             }
@@ -141,8 +161,8 @@ public class FragGallery extends Fragment {
                             updateData(cnt);
                         adapter = new ImageAdapter(uriList, getContext());
                         recyclerView.setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));     // 리사이클러뷰 수평 스크롤 적용
-                        //recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
+                       recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));     // 리사이클러뷰 수평 스크롤 적용
+                       // recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
 
 
 
@@ -160,14 +180,13 @@ public class FragGallery extends Fragment {
                         saveBitmapToJpeg(imgBitmap);    // 내부 저장소에 저장
                         updateData(cnt);
 
-                        Toast.makeText(getContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(getContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
                     }
 
                     adapter = new ImageAdapter(uriList, getContext());
                     recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                    recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
                     //recyclerView.addItemDecoration(new RecyclerViewDecoration(10, 10));
 
                 }
@@ -177,14 +196,14 @@ public class FragGallery extends Fragment {
 
 
     public void saveBitmapToJpeg (Bitmap bitmap){   // 선택한 이미지 내부 저장소에 저장
-        File tempFile = new File(getActivity().getCacheDir(), cnt.toString());    // 파일 경로와 이름 넣기
+        File tempFile = new File(getActivity().getCacheDir(), cnt.toString());
+        // 파일 경로와 이름 넣기
         try {
             tempFile.createNewFile();   // 자동으로 빈 파일을 생성하기
             FileOutputStream out = new FileOutputStream(tempFile);  // 파일을 쓸 수 있는 스트림을 준비하기
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
             out.close();    // 스트림 닫아주기
             cnt++;
-            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
         }
@@ -201,6 +220,11 @@ public class FragGallery extends Fragment {
 
     public void updateData(int cnt){
         editor.putInt("Count", cnt);
+        editor.apply();
+    }
+
+    public void removeData(){
+        editor.putInt("Count", 0);
         editor.apply();
     }
 
