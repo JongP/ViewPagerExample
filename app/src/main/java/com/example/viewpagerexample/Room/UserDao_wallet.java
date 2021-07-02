@@ -22,7 +22,11 @@ public interface UserDao_wallet {
     @Query("UPDATE Wallet SET quantity =:t, value =:s WHERE symbol = :p")
     void update(int t, Double s, String p);
 
+    @Query("SELECT quantity FROM Wallet WHERE symbol =:p")
+    void getQuantity(String p);
 
+    @Query("SELECT * FROM Wallet WHERE symbol =:p")
+    User_wallet getWallet(String p);
 
 
     @Delete

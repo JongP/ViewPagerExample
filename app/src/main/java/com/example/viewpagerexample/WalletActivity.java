@@ -41,6 +41,11 @@ public class WalletActivity extends AppCompatActivity {
         db = AppDataBase_wallet.getInstance(this);
         recyclerView = findViewById(R.id.recyclerView_wallet);
 
+        for(int i=0;i<db.userDao().getDataCount();i++){
+            User_wallet user = db.userDao().getAll().get(i);
+
+        }
+
 
 
 

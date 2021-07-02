@@ -2,6 +2,7 @@ package com.example.viewpagerexample.Room;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,6 +11,7 @@ import androidx.room.PrimaryKey;
 public class User_wallet {
 
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "symbol") //컬럼명 변수명과 다르게 사용 가능
     private String sym;
 
