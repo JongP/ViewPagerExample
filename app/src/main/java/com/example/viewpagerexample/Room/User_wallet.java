@@ -1,5 +1,7 @@
 package com.example.viewpagerexample.Room;
 
+import android.util.Log;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -127,6 +129,76 @@ public class User_wallet {
 
     public void setBUSD(int BUSD) {
         this.BUSD = BUSD;
+    }
+
+    public int getCoinCount(String sym){
+        Log.d("mywallet", "getCoinCount: "+sym);
+        switch (sym){
+            case "BTC":
+                return BTC;
+            case "ETH":
+                return ETH;
+            case "USDT":
+                return USDT;
+            case "BNB":
+                return BNB;
+            case "ADA":
+                return ADA;
+            case "DOGE":
+                return DOGE;
+            case "XRP":
+                return XRP;
+            case "USDC":
+                return USDC;
+            case "DOT":
+                return DOT;
+            case "BUSD":
+                return BUSD;
+            default:
+                Log.d("userwallet", "get default");
+                return 0;
+        }
+    }
+
+    public void setCoinCount(String sym,int num){
+        Log.d("mywallet", "setCoinCount: "+sym);
+
+        switch (sym){
+            case "BTC":
+                this.BTC= num;
+                break;
+            case "ETH":
+                 this.ETH=num;
+                 break;
+            case "USDT":
+                 this.USDT=num;
+                 break;
+            case "BNB":
+                 this.BNB=num;
+                 break;
+            case "ADA":
+                 this.ADA=num;
+                 break;
+            case "DOGE":
+                 this.DOGE=num;
+                 break;
+            case "XRP":
+                 this.XRP=num;
+                 break;
+            case "USDC":
+                 this.USDC=num;
+                 break;
+            case "DOT":
+                 this.DOT=num;
+                 break;
+            case "BUSD":
+                 this.BUSD=num;
+                 break;
+            default:
+                Log.d("userwallet", "set default");
+                break;
+
+        }
     }
 
     public User_wallet(Double balance) {

@@ -37,6 +37,7 @@ public interface UserDao_wallet {
     @Query("UPDATE Wallet SET BUSD = :p WHERE id =:id")
     void updateBUSD(int p, int id);
 
+
     @Query("UPDATE Wallet SET balance = :p WHERE id =:id")
     void updatebalance(Double p, int id);
 
@@ -55,4 +56,5 @@ public interface UserDao_wallet {
 
     @Query("SELECT COUNT(*) as cnt FROM Wallet")
     int getDataCount();
+
 }

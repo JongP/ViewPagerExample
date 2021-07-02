@@ -73,6 +73,7 @@ public class FragDoge extends Fragment implements CurrencyRVAdapter.GetOneCoin{
         currenciesRV.setAdapter(currencyRVAdapter);
         fltbtn = view.findViewById(R.id.button);
 
+        Log.d("mydatabase", "database is set");
         db = AppDataBase_wallet.getInstance(getContext());
         if(db.userDao().getDataCount()==0){
             User_wallet user = new User_wallet(5000000.0);
