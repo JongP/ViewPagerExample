@@ -11,12 +11,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.viewpagerexample.Room.AppDataBase_wallet;
+
 public class OrderActivity extends AppCompatActivity {
 
     private TextView tv_symbol,tv_name, tv_price, tv_quantity,tv_total;
     private Button btn_minus,btn_plus, btn_sell, btn_buy;
     private int quantity;
     Double totalPrice;
+    private AppDataBase_wallet db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class OrderActivity extends AppCompatActivity {
         btn_buy = findViewById(R.id.btn_buy);
         btn_sell = findViewById(R.id.btn_sell);
         quantity = 0;
+        db = AppDataBase_wallet.getInstance(this);
+
 
 
         Intent intent = getIntent();
@@ -43,6 +49,8 @@ public class OrderActivity extends AppCompatActivity {
         tv_symbol.setText(symbol);
         tv_name.setText(name);
         tv_price.setText("$ "+String.valueOf(price));
+        //.setText("$"+db.userDao().getAll().get(0).getBalance().toString());
+
 
 
         btn_plus.setOnClickListener(new View.OnClickListener() {
